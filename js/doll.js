@@ -156,14 +156,16 @@ export function buildDoll(state, mats, headDef) {
     [0.315, 0], [0.332, 0.08], [0.375, 0.22], [0.405, 0.38], [0.415, 0.50],
     [0.402, 0.62], [0.372, 0.72], [0.328, 0.82], [0.268, 0.90], [0.215, 0.96],
   ].map(([r, v]) => [r * (size.chestR / 0.415), v * chestH]);
-  const chest = mesh(latheGeo(chestProfile, 56), mats.skin);
-  chest.scale.z = zs;
+  const chest = new THREE.Group();
   spine.add(chest);
+  const chestMesh = mesh(latheGeo(chestProfile, 56), mats.skin);
+  chestMesh.scale.z = zs;
+  chest.add(chestMesh);
 
   // ---- neck + head ----
   const neck = new THREE.Group();
   neck.position.y = chestH * 0.965;
-  spine.add(neck);
+  chest.add(neck);
   const neckMesh = mesh(latheGeo([[0.135, 0], [0.145, 0.1], [0.15, neckLen * 0.7], [0.142, neckLen]], 32), mats.skin);
   neckMesh.scale.z = zs;
   neck.add(neckMesh);
@@ -184,7 +186,7 @@ export function buildDoll(state, mats, headDef) {
   for (const [side, s] of [['L', 1], ['R', -1]]) {
     const shoulder = new THREE.Group();
     shoulder.position.set(s * size.shoulder, chestH * 0.90, 0);
-    spine.add(shoulder);
+    chest.add(shoulder);
     addBall(shoulder, 0.158 * (0.9 + child * 0.2), mats);
     const upper = mesh(limbGeo(upperArm, size.armR, size.foreR * 1.02, 24), mats.skin);
     shoulder.add(upper);
