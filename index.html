@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f1e8">
+<title>BJD Atelier · 寧々酱的娃娃工房</title>
+<meta name="description" content="在浏览器里捏一只属于你的 BJD：尺寸、娃头、妆容、发型、服装、鞋履、姿势与背景自由组合。">
+<link rel="stylesheet" href="css/style.css">
+<script type="importmap">
+{ "imports": { "three": "./vendor/three.module.js" } }
+</script>
+</head>
+<body>
+  <canvas id="stage"></canvas>
+
+  <header class="top">
+    <div class="brand">
+      <span class="brand-mark">BJD</span>
+      <span class="brand-text">
+        <h1>Atelier <em>寧々</em></h1>
+        <p id="meta">加载中…</p>
+      </span>
+    </div>
+    <div class="tools">
+      <button id="btn-random" class="tool">随机搭配</button>
+      <button id="btn-reset" class="tool">重置</button>
+      <button id="btn-save" class="tool primary">保存照片</button>
+    </div>
+  </header>
+
+  <div class="hint" id="hint">拖动旋转 · 滚轮缩放</div>
+
+  <section class="panel">
+    <nav class="tabs" id="tabs"></nav>
+    <div class="rows" id="rows"></div>
+    <div class="panel-foot"><span id="combo"></span></div>
+  </section>
+
+  <div class="loader" id="loader"><span>正在打磨树脂…</span></div>
+
+  <script>
+    window.addEventListener('error', (e) => { document.title = 'ERR ' + e.message; });
+    window.addEventListener('unhandledrejection', (e) => { document.title = 'REJ ' + e.reason; });
+  </script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
